@@ -61,4 +61,37 @@ important things to look for are blood pressure, White blood cells and what they
 
 
 
-//Step2
+//Step2 sending parsed data to the frontend
+const express = require('express');
+const cors = require('cors');
+
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+function analyzeResults(data){
+  const analysis = [];
+
+  const wbc = data.find(r => r.Test === "WBC");
+  if (wbc) {
+    let status = "normal";
+    if (wbc.Value > 11) status = "above normal";
+    else if (wbc.Value < 4) status = "below normal";
+    analysis.push({ test: "WBC", value: wbc.Value, status });
+  }
+
+  //Add more test check later
+
+  return analysis;
+}
+
+app.get('/api/lab-results', (req, res) =>{
+  res.json({success: true, data: results});
+})
+
+app.get('/api/lab-results/analysis', (req, res) => {
+  const analysis = analyzeResults(results);
+  res.json({success: true, analysis});
+});
+
+
