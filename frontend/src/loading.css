@@ -1,28 +1,29 @@
 @import url("https://fonts.googleapis.com/css2?family=Sora:wght@300;600;700&family=DM+Sans:wght@400;500;600&display=swap");
 
-/* ── shared tokens (mirrors LandingPage.css / dashboard light) ── */
+/* ── tokens — mirrors LandingPage.css ── */
 .loading-root {
 	font-family: "DM Sans", sans-serif;
-	background-color: #f0f4f9;
+	background-color: #f7f3ee;
 	background-image: radial-gradient(ellipse 90% 55% at 50% -10%, rgba(99, 102, 241, 0.07), transparent);
 	min-height: 100vh;
 	color: #0f1117;
 	display: flex;
 	flex-direction: column;
 	overflow: hidden;
+	transition: background 0.35s, color 0.35s;
 }
 
-/* ── header (identical to landing) ── */
+/* ── header ── */
 .loading-header {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	padding: 22px 48px;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.07);
-	background: rgba(240, 244, 249, 0.88);
+	background: rgba(247, 243, 238, 0.88);
 	backdrop-filter: blur(12px);
 	flex-shrink: 0;
-	animation: lFadeDown 0.4s ease both;
+	animation: lFadeDown 0.5s ease both;
 }
 
 .loading-logo {
@@ -34,7 +35,7 @@
 .loading-logo-icon {
 	width: 36px;
 	height: 36px;
-	background: #6366f1;
+	background: #2a9d8f;
 	border-radius: 9px;
 	display: flex;
 	align-items: center;
@@ -51,7 +52,7 @@
 }
 
 .loading-logo-text span {
-	color: #6366f1;
+	color: #4dbfb3;
 }
 
 .loading-header-badge {
@@ -60,7 +61,7 @@
 	letter-spacing: 0.1em;
 	text-transform: uppercase;
 	color: rgba(0, 0, 0, 0.42);
-	background: #ffffff;
+	background: rgba(253, 250, 247, 0.9);
 	border: 1px solid rgba(0, 0, 0, 0.08);
 	padding: 6px 14px;
 	border-radius: 20px;
@@ -93,10 +94,10 @@
 }
 
 .loading-ring-outer {
-	border-top-color: #6366f1;
-	border-right-color: rgba(99, 102, 241, 0.25);
-	border-bottom-color: rgba(99, 102, 241, 0.25);
-	border-left-color: rgba(99, 102, 241, 0.25);
+	border-top-color: #2a9d8f;
+	border-right-color: rgba(42, 157, 143, 0.25);
+	border-bottom-color: rgba(42, 157, 143, 0.25);
+	border-left-color: rgba(42, 157, 143, 0.25);
 	animation: lSpin 1s linear infinite;
 }
 
@@ -158,8 +159,8 @@
 }
 
 .loading-step.active {
-	border-color: rgba(99, 102, 241, 0.4);
-	box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.08), 0 1px 4px rgba(0, 0, 0, 0.06);
+	border-color: rgba(42, 157, 143, 0.45);
+	box-shadow: 0 0 0 3px rgba(42, 157, 143, 0.08), 0 1px 4px rgba(0, 0, 0, 0.06);
 	color: #0f1117;
 	font-weight: 500;
 }
@@ -178,8 +179,8 @@
 }
 
 .loading-step.active .loading-step-dot {
-	background: #6366f1;
-	box-shadow: 0 0 8px rgba(99, 102, 241, 0.55);
+	background: #2a9d8f;
+	box-shadow: 0 0 8px rgba(42, 157, 143, 0.6);
 	animation: lPulse 1s ease-in-out infinite;
 }
 

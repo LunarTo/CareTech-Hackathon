@@ -41,7 +41,7 @@ export default function LoadingPage() {
           <div className="loading-ring loading-ring-outer" />
           <div className="loading-ring loading-ring-inner" />
           <div className="loading-icon-center">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#6366f1" strokeWidth="2" strokeLinecap="round">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2a9d8f" strokeWidth="2" strokeLinecap="round">
               <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
             </svg>
           </div>
