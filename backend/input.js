@@ -49,7 +49,37 @@ function analyzeResults(data){
     analysis.push({ test: "WBC", value: wbc.Value, status });
   }
 
-  //Add more test check later
+  const rbc = data.find(r => r.Test === "RBC");
+  if (rbc){
+    let status = "normal";
+    if (rbc.Value > 6) status = "above normal";
+    else if (rbc.Value < 4) status = "below normal";
+    analysis.push({ test: "RBC", value: rbc.Value, status });
+  } 
+
+  const hb = data.find(r => r.Test === "Hgb");
+  if (hb){
+    let status = "normal";
+    if (hb.Value > 17) status = "above normal";
+    else if (hb.Value < 13) status = "below normal";
+    analysis.push({ test: "Hgb", value: hb.Value, status });
+  }
+  
+  const hct = data.find(r => r.Test === "Hct");
+  if (hct){
+    let status = "normal";
+    if (hct.Value > 53) status = "above normal";
+    else if (hct.Value < 41) status = "below normal";
+    analysis.push({ test: "Hct", value: hct.Value, status });
+  } 
+
+  const mcv = data.find(r => r.Test === "MCV");
+  if (mcv){
+    let status = "normal";
+    if (mcv.Value > 100) status = "above normal";
+    else if (mcv.Value < 80) status = "below normal";
+    analysis.push({ test: "MCV", value: mcv.Value, status });
+  } 
 
   return analysis;
 }
@@ -63,7 +93,7 @@ app.get('/api/lab-results/analysis', (req, res) => {
   res.json({success: true, analysis});
 });
 
-app.post('api/upload', upload.single('file'), (req, res) => {
+app.post('/api/upload', upload.single('file'), (req, res) => {
   const results = [];
   const bufferStream = Readable.from(req.file.buffer.toString());
   bufferStream
