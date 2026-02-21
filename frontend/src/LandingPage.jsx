@@ -44,8 +44,27 @@ export default function LandingPage() {
       setStatus({ msg: "⚠ Please upload a .csv file.", type: "error" });
       return;
     }
-    setStatus({ msg: `✓ "${file.name}" ready — generating dashboard…`, type: "success" });
-    // TODO: pass file to dashboard generation logic
+    setStatus({  msg: `Uploading "${file.name}"…`, type: "" });
+    const formData = new FormData();
+    formData.append('file', file);
+
+    fetch('http://localhost:3000/api/upload', {
+      method: 'POST',
+      body: formData,
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          setStatus({ msg: `✓ "${file.name}" ready — generating dashboard…`, type: "success" });
+          console.log('Results:', data.data);
+          console.log('Analysis:', data.analysis);
+        } else {
+          setStatus({ msg: " Error processing file.", type: "error" });
+        }
+      })
+      .catch(() => {
+        setStatus({ msg: " Could not reach the server.", type: "error" });
+      });
   }, []);
 
   const onDragOver = (e) => { e.preventDefault(); setDragActive(true); };

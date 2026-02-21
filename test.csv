@@ -1,0 +1,16 @@
+Test,Value,Units
+WBC,16.8,10^9/L
+RBC,3.9,10^12/L
+Hgb,10.6,g/dL
+Hct,31.8,%
+MCV,82,fL
+MCH,27.2,pg
+MCHC,31.8,g/dL
+RDW,16.5,%
+Platelets,112,10^9/L
+MPV,11.2,fL
+Neutrophils %,84,%
+Lymphocytes %,10,%
+Monocytes %,5,%
+Eosinophils %,1,%
+Basophils %,0,%
