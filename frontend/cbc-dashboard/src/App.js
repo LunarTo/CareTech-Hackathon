@@ -1,4 +1,4 @@
-import CBCDashboard from './CBCDashboard';
+import CBCDashboard from './dashboard';
 
 function App() {
   return <CBCDashboard />;
