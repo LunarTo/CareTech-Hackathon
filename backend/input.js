@@ -8,8 +8,18 @@
 //importing things we need to parse
 const fs = require('fs');
 const csv = require('csv-parser');
+const express = require('express');
+const cors = require('cors');
+const multer = require('multer');
+const { Readable } = require('stream');
+
+//Init app
+const app = express();
+app.use(cors());
+app.use(express.json());
 
 const results = [];
+const upload = multer({storage: multer.memoryStorage()});
 
 function convertTypes(row) {
   const newRow = {};
@@ -27,13 +37,6 @@ function convertTypes(row) {
 
   return newRow;
 }
-
-const express = require('express');
-const cors = require('cors');
-
-const app = express();
-app.use(cors());
-app.use(express.json());
 
 function analyzeResults(data){
   const analysis = [];
@@ -53,11 +56,28 @@ function analyzeResults(data){
 
 app.get('/api/lab-results', (req, res) =>{
   res.json({success: true, data: results});
-})
+});
 
 app.get('/api/lab-results/analysis', (req, res) => {
   const analysis = analyzeResults(results);
   res.json({success: true, analysis});
+});
+
+app.post('api/upload', upload.single('file'), (req, res) => {
+  const results = [];
+  const bufferStream = Readable.from(req.file.buffer.toString());
+  bufferStream
+    .pipe(csv())
+    .on('data', (row) => {
+      results.push(convertTypes(row));
+    })
+    .on('end', () => {
+      const analysis = analyzeResults(results);
+      res.json({ success: true, data: results, analysis });
+    })
+    .on('error', (err) => {
+      res.status(500).json({ success: false, error: err.message });
+    });
 });
 
 //reads the csv file, and compares the data with healthcare standards
