@@ -17,58 +17,29 @@ const SAMPLE_CBC = {
   ],
 };
 
-// ─── Theme tokens ─────────────────────────────────────────────────────────────
-const THEMES = {
-  dark: {
-    bg:              "#0b0e18",
-    bgGradient:      "radial-gradient(ellipse 90% 55% at 50% -10%, rgba(99,102,241,0.11), transparent)",
-    surface:         "rgba(255,255,255,0.03)",
-    surfaceBorder:   "rgba(255,255,255,0.07)",
-    cardBg:          "rgba(255,255,255,0.03)",
-    cardBorder:      "rgba(255,255,255,0.07)",
-    text:            "#ffffff",
-    textMuted:       "rgba(255,255,255,0.38)",
-    textSubtle:      "rgba(255,255,255,0.22)",
-    textBody:        "rgba(255,255,255,0.6)",
-    divider:         "rgba(255,255,255,0.07)",
-    tooltipBg:       "#151929",
-    tooltipBorder:   "rgba(255,255,255,0.1)",
-    gaugeBg:         "rgba(255,255,255,0.07)",
-    thumbBorder:     "#0b0e18",
-    bannerBg:        "linear-gradient(135deg, rgba(99,102,241,0.14), rgba(52,211,153,0.07))",
-    bannerBorder:    "rgba(99,102,241,0.22)",
-    toggleBg:        "rgba(255,255,255,0.07)",
-    toggleBorder:    "rgba(255,255,255,0.12)",
-    toggleTrack:     "rgba(99,102,241,0.5)",
-    toggleThumb:     "#818cf8",
-    radialBg:        "rgba(255,255,255,0.03)",
-    shadow:          "none",
-  },
-  light: {
-    bg:              "#f0f4f9",
-    bgGradient:      "radial-gradient(ellipse 90% 55% at 50% -10%, rgba(99,102,241,0.07), transparent)",
-    surface:         "#ffffff",
-    surfaceBorder:   "rgba(0,0,0,0.08)",
-    cardBg:          "#ffffff",
-    cardBorder:      "rgba(0,0,0,0.09)",
-    text:            "#0f1117",
-    textMuted:       "rgba(0,0,0,0.42)",
-    textSubtle:      "rgba(0,0,0,0.28)",
-    textBody:        "rgba(0,0,0,0.62)",
-    divider:         "rgba(0,0,0,0.07)",
-    tooltipBg:       "#ffffff",
-    tooltipBorder:   "rgba(0,0,0,0.1)",
-    gaugeBg:         "rgba(0,0,0,0.08)",
-    thumbBorder:     "#f0f4f9",
-    bannerBg:        "linear-gradient(135deg, rgba(99,102,241,0.07), rgba(22,163,74,0.05))",
-    bannerBorder:    "rgba(99,102,241,0.16)",
-    toggleBg:        "rgba(0,0,0,0.06)",
-    toggleBorder:    "rgba(0,0,0,0.1)",
-    toggleTrack:     "rgba(0,0,0,0.15)",
-    toggleThumb:     "#ffffff",
-    radialBg:        "rgba(0,0,0,0.03)",
-    shadow:          "0 1px 4px rgba(0,0,0,0.06)",
-  },
+// ─── Theme (matches LandingPage teal scheme) ──────────────────────────────────
+const THEME = {
+  bg:              "#f7f3ee",
+  bgGradient:      "radial-gradient(ellipse 90% 55% at 50% -10%, rgba(42,157,143,0.08), transparent)",
+  surface:         "rgba(253,250,247,0.9)",
+  surfaceBorder:   "rgba(0,0,0,0.08)",
+  cardBg:          "#ffffff",
+  cardBorder:      "rgba(0,0,0,0.09)",
+  text:            "#0f1117",
+  textMuted:       "rgba(0,0,0,0.42)",
+  textSubtle:      "rgba(0,0,0,0.28)",
+  textBody:        "rgba(0,0,0,0.62)",
+  divider:         "rgba(0,0,0,0.07)",
+  tooltipBg:       "#ffffff",
+  tooltipBorder:   "rgba(0,0,0,0.1)",
+  gaugeBg:         "rgba(0,0,0,0.08)",
+  thumbBorder:     "#f7f3ee",
+  bannerBg:        "linear-gradient(135deg, rgba(42,157,143,0.1), rgba(22,163,74,0.06))",
+  bannerBorder:    "rgba(42,157,143,0.22)",
+  teal:            "#2a9d8f",
+  tealLight:       "#4dbfb3",
+  radialBg:        "rgba(0,0,0,0.03)",
+  shadow:          "0 1px 4px rgba(0,0,0,0.06)",
 };
 
 // ─── Status colors ────────────────────────────────────────────────────────────
@@ -87,38 +58,6 @@ function getStatus(v, min, max) {
 function getPercent(v, min, max) {
   const lo = min * 0.7, hi = max * 1.3;
   return Math.min(100, Math.max(0, ((v - lo) / (hi - lo)) * 100));
-}
-
-// ─── Theme Toggle ─────────────────────────────────────────────────────────────
-function ThemeToggle({ isDark, onToggle, t }) {
-  return (
-    <button
-      onClick={onToggle}
-      style={{
-        display: "flex", alignItems: "center", gap: 9,
-        background: t.toggleBg, border: `1px solid ${t.toggleBorder}`,
-        borderRadius: 30, padding: "8px 16px", cursor: "pointer",
-        transition: "all 0.25s", fontFamily: "'DM Sans', sans-serif",
-        fontSize: 13, color: t.text, fontWeight: 500,
-      }}
-    >
-      <div style={{
-        position: "relative", width: 36, height: 20, borderRadius: 10,
-        background: isDark ? "rgba(99,102,241,0.55)" : t.toggleTrack,
-        transition: "background 0.3s", flexShrink: 0,
-      }}>
-        <div style={{
-          position: "absolute", top: 3,
-          left: isDark ? 19 : 3,
-          width: 14, height: 14, borderRadius: "50%",
-          background: t.toggleThumb,
-          boxShadow: "0 1px 4px rgba(0,0,0,0.25)",
-          transition: "left 0.25s cubic-bezier(.4,0,.2,1)",
-        }} />
-      </div>
-      <span>{isDark ? "🌙 Dark" : "☀️ Light"}</span>
-    </button>
-  );
 }
 
 // ─── Gauge Bar ────────────────────────────────────────────────────────────────
@@ -211,8 +150,7 @@ function RadialOverview({ panels, t }) {
 // ─── Root ─────────────────────────────────────────────────────────────────────
 export default function CBCDashboard({ cbc = SAMPLE_CBC }) {
   const [selected, setSelected] = useState(null);
-  const [isDark,   setIsDark]   = useState(true);
-  const t = THEMES[isDark ? "dark" : "light"];
+  const t = THEME;
 
   const normalCount = cbc.panels.filter((p) => getStatus(p.value, p.min, p.max) === "normal").length;
   const total       = cbc.panels.length;
@@ -222,7 +160,7 @@ export default function CBCDashboard({ cbc = SAMPLE_CBC }) {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;600;700&family=DM+Sans:wght@400;500;600&display=swap');
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: ${t.bg} !important; transition: background 0.35s; }
+        body { background: ${t.bg} !important; }
         .cbc-cards  { display: grid; grid-template-columns: repeat(2, 1fr); gap: 13px; }
         .cbc-layout { display: grid; grid-template-columns: 230px 1fr; gap: 20px; align-items: start; }
         @media (max-width: 740px) {
@@ -238,7 +176,6 @@ export default function CBCDashboard({ cbc = SAMPLE_CBC }) {
         padding: "44px 24px 70px",
         maxWidth: 1000,
         margin: "0 auto",
-        transition: "background 0.35s, color 0.35s",
         fontFamily: "'DM Sans', sans-serif",
         color: t.text,
       }}>
@@ -247,7 +184,7 @@ export default function CBCDashboard({ cbc = SAMPLE_CBC }) {
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 30, flexWrap: "wrap", gap: 16 }}>
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
-              <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#16a34a", boxShadow: "0 0 8px #16a34a88" }} />
+              <div style={{ width: 7, height: 7, borderRadius: "50%", background: t.teal, boxShadow: `0 0 8px ${t.teal}88` }} />
               <span style={{ fontSize: 11, color: t.textMuted, letterSpacing: "0.12em", textTransform: "uppercase" }}>
                 Complete Blood Count Report
               </span>
@@ -257,7 +194,6 @@ export default function CBCDashboard({ cbc = SAMPLE_CBC }) {
             </h1>
             <p style={{ marginTop: 5, fontSize: 13, color: t.textMuted }}>{cbc.date}</p>
           </div>
-          <ThemeToggle isDark={isDark} onToggle={() => setIsDark(!isDark)} t={t} />
         </div>
 
         {/* ── Summary Banner ── */}
