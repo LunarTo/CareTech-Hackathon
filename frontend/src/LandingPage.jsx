@@ -2,6 +2,8 @@ import { useState, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import "./LandingPage.css";
 
+const API_BASE = "http://localhost:3001";
+
 const UploadIcon = () => (
   <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2a9d8f" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
@@ -35,10 +37,10 @@ const features = [
 ];
 
 export default function LandingPage() {
+  const navigate = useNavigate();
   const [dragActive, setDragActive] = useState(false);
   const [status, setStatus] = useState({ msg: "", type: "" });
   const fileInputRef = useRef(null);
-  const navigate = useNavigate();
 
   const handleFile = useCallback((file) => {
     if (!file) return;
@@ -46,30 +48,26 @@ export default function LandingPage() {
       setStatus({ msg: "⚠ Please upload a .csv file.", type: "error" });
       return;
     }
-    setStatus({  msg: `Uploading "${file.name}"…`, type: "" });
+    setStatus({ msg: `Uploading "${file.name}"…`, type: "" });
     const formData = new FormData();
-    formData.append('file', file);
+    formData.append("file", file);
 
-    fetch('http://localhost:3000/api/upload', {
-      method: 'POST',
+    fetch(`${API_BASE}/api/upload`, {
+      method: "POST",
       body: formData,
     })
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         if (data.success) {
-          setStatus({ msg: `✓ "${file.name}" ready — generating dashboard…`, type: "success" });
-          console.log('Results:', data.data);
-          console.log('Analysis:', data.analysis);
+          setStatus({ msg: `✓ "${file.name}" ready — opening dashboard…`, type: "success" });
+          // Go to dashboard: it will show loading then fetch the data we just uploaded
+          navigate("/dashboard");
         } else {
           setStatus({ msg: " Error processing file.", type: "error" });
         }
-        // Navigate to loading page regardless of success or failure
-        navigate('/loading');
       })
       .catch(() => {
-        setStatus({ msg: " Could not reach the server.", type: "error" });
-        // Navigate to loading page even on error
-        navigate('/loading');
+        setStatus({ msg: " Could not reach the server. Is the backend running on port 3001?", type: "error" });
       });
   }, [navigate]);
 

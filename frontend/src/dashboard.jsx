@@ -1,5 +1,16 @@
 import { useState } from "react";
 import { RadialBarChart, RadialBar, ResponsiveContainer, Tooltip } from "recharts";
+import { getMarkerDescription } from "./Descriptions";
+
+// Map panel id (from backend) to Descriptions.js test key
+const PANEL_ID_TO_TEST = {
+  rbc: "RBC",
+  wbc: "WBC",
+  hgb: "Hgb",
+  hct: "Hct",
+  plt: "Platelets",
+  mcv: "MCV",
+};
 
 // ─── Sample CBC Data ──────────────────────────────────────────────────────────
 const SAMPLE_CBC = {
@@ -80,6 +91,11 @@ function PanelCard({ panel, isSelected, onClick, t }) {
   const status = getStatus(panel.value, panel.min, panel.max);
   const col    = STATUS[status].color;
   const lbl    = STATUS[status].label;
+  const testName = PANEL_ID_TO_TEST[panel.id];
+  const description = testName
+    ? getMarkerDescription(testName, panel.value, panel.min, panel.max)
+    : panel.description;
+  const displayDescription = description || panel.description;
   return (
     <div onClick={onClick} style={{
       background: isSelected ? col + "0e" : t.cardBg,
@@ -112,9 +128,9 @@ function PanelCard({ panel, isSelected, onClick, t }) {
         <span>↑ {panel.max}</span>
       </div>
 
-      {isSelected && (
+      {isSelected && displayDescription && (
         <p style={{ marginTop: 14, paddingTop: 13, borderTop: `1px solid ${t.divider}`, fontSize: 13, color: t.textBody, lineHeight: 1.65, fontFamily: "'DM Sans', sans-serif", marginBottom: 0 }}>
-          {panel.description}
+          {displayDescription}
         </p>
       )}
     </div>
