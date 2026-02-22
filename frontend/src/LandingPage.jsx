@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import "./LandingPage.css";
 
 const UploadIcon = () => (
@@ -37,6 +38,7 @@ export default function LandingPage() {
   const [dragActive, setDragActive] = useState(false);
   const [status, setStatus] = useState({ msg: "", type: "" });
   const fileInputRef = useRef(null);
+  const navigate = useNavigate();
 
   const handleFile = useCallback((file) => {
     if (!file) return;
@@ -61,11 +63,15 @@ export default function LandingPage() {
         } else {
           setStatus({ msg: " Error processing file.", type: "error" });
         }
+        // Navigate to loading page regardless of success or failure
+        navigate('/loading');
       })
       .catch(() => {
         setStatus({ msg: " Could not reach the server.", type: "error" });
+        // Navigate to loading page even on error
+        navigate('/loading');
       });
-  }, []);
+  }, [navigate]);
 
   const onDragOver = (e) => { e.preventDefault(); setDragActive(true); };
   const onDragLeave = () => setDragActive(false);

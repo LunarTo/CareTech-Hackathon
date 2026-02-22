@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./loading.css";
 
 const LogoIcon = () => (
@@ -14,12 +15,21 @@ const STEPS = [
 
 export default function LoadingPage() {
   const [activeStep, setActiveStep] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (activeStep >= STEPS.length - 1) return;
     const id = setTimeout(() => setActiveStep((s) => s + 1), 1400);
     return () => clearTimeout(id);
   }, [activeStep]);
+
+  // Navigate to dashboard after 2 seconds
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      navigate('/dashboard');
+    }, 2000);
+    return () => clearTimeout(timeoutId);
+  }, [navigate]);
 
   return (
     <div className="loading-root">

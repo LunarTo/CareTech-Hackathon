@@ -3,8 +3,8 @@ import { RadialBarChart, RadialBar, ResponsiveContainer, Tooltip } from "rechart
 
 // ─── Sample CBC Data ──────────────────────────────────────────────────────────
 const SAMPLE_CBC = {
-  patientName: "Sarah Johnson",
-  date: "February 21, 2026",
+  patientName: "",
+  date: "",
   summary:
     "Your blood work looks generally healthy — most values are within normal range, with slightly low iron levels worth monitoring.",
   panels: [
