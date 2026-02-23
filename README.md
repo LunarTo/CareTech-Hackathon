@@ -12,9 +12,9 @@ Built in 3.5 hours at the AI x Healthcare Hackathon hosted by CareTech UCI.
 CBC lab reports contain medical terminology, abbreviations, and reference ranges that are difficult for patients to interpret.
 
 Many patients:
-(*) Struggle to understand what their numbers mean
-(*) Cannot easily identify abnormal values
-(*) Feel anxious due to lack of clear explanations
+* Struggle to understand what their numbers mean
+* Cannot easily identify abnormal values
+* Feel anxious due to lack of clear explanations
 
 We wanted to make lab results more transparent and accessible.
 
@@ -22,9 +22,9 @@ We wanted to make lab results more transparent and accessible.
 ## Solution
 
 Simple CBC allows healthcare workers (or users) to input CBC lab values and instantly generates:
-(*) Flagged abnormal values
-(*) Interactive dashboard visualization
-(*) Plain-language explanations
+* Flagged abnormal values
+* Interactive dashboard visualization
+* Plain-language explanations
 
 The result is a clear, readable summary designed for patients rather than clinicians.
 
