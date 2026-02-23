@@ -6,7 +6,6 @@ Our goal is to reduce confusion around blood test reports and improve health lit
 
 Built in 3.5 hours at the AI x Healthcare Hackathon hosted by CareTech UCI.
 
-⸻
 
 ## Problem
 
@@ -19,7 +18,6 @@ Many patients:
 
 We wanted to make lab results more transparent and accessible.
 
-⸻
 
 ## Solution
 
@@ -31,13 +29,11 @@ Simple CBC allows healthcare workers (or users) to input CBC lab values and inst
 
 The result is a clear, readable summary designed for patients rather than clinicians.
 
-⸻
 
 ## Demo
 
 https://youtu.be/BzX8aqHOQJk
 
-⸻
 
 ## Devpost
 
